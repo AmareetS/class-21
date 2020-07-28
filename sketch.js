@@ -1,43 +1,31 @@
-var M_rect,F_rect;
-var gameObject1, gameObject2, gameObject3, gameObject4;
+var fixedRect, movingRect;
+var gameobject1, gameobject2;
+
 function setup() {
-  createCanvas(800,400);
-  M_rect = createSprite(400, 200, 50, 50);
-  F_rect = createSprite(100, 200, 50, 50);
-  M_rect.shapeColor = "red";
-  F_rect.shapeColor = "red";
-  gameObject1=createSprite(200,100,80,80);
-  gameObject2=createSprite(300,100,80,80);
-  gameObject3=createSprite(400,100,80,80);
-  gameObject4=createSprite(500,100,80,80);
-  gameObject1.shapeColor="red";
-  gameObject2.shapeColor="red";
-  gameObject3.shapeColor="red";
-  gameObject4.shapeColor="red";
-  
-  M_rect.debug = true;
-  F_rect.debug = true;
-  gameObject1.debug=true;
-  gameObject2.debug=true;
-  gameObject3.debug=true;
-  gameObject4.debug=true;
+  createCanvas(1200,800);
+  fixedRect = createSprite(100, 400, 50, 80);
+  fixedRect.shapeColor = "green";
+  fixedRect.debug = true;
+  movingRect = createSprite(800, 400,80,30);
+  movingRect.shapeColor = "green";
+  movingRect.debug = true;
+  movingRect.velocityX = -5;
+  fixedRect.velocityX = +5;
+  gameobject1=createSprite(400,100,60,40);
+  gameobject2=createSprite(400,800,30,70);
+  gameobject1.shapeColor="green";
+  gameobject2.shapeColor="green";
+  gameobject1.velocityY = +5;
+  gameobject2.velocityY = -5;
+  gameobject1.debug = true;
+  gameobject2.debug = true;
 
 }
 
 function draw() {
-  background(255,255,255);  
-M_rect.y = World.mouseY;
-M_rect.x = World.mouseX;
-if(isTouching(M_rect,gameObject3))
-{
-  M_rect.shapeColor = "green";
-  gameObject3.shapeColor = "green";
+  background(0,0,0);  
+  bounceoff(movingRect,fixedRect);
+  bounceoff(gameobject1,gameobject2);
 
-}
-else 
-{
-  M_rect.shapeColor = "red";
-  gameObject3.shapeColor = "red";
-}
   drawSprites();
 }
